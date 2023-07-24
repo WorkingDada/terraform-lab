@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    git branch: "main", url: "https://github.com/WorkingDada/terraform-lab.git"
+                }
+            }
+        }
+
+        stage('Change Directory') {
+            steps {
+                script {
+                    sh 'cd create-aws-resource'
+                }
+            }
+        }
+
+        stage('Terraform init') {
+            steps {
+                script {
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Terraform apply') {
+            steps {
+                script {
+                    sh 'terraform apply'
+                }
+            }
+        }
+    }
+}
